@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt  # needed if you want to plot the comparison of 
 #########################################################################################
 # Reading input file and creating a dictionary with the required input values ###########
 #########################################################################################
-name = "Solar-Panel-Calculator/input.txt"
+name = "input.txt"
 value_inputs = open(name)
 list_input_values = {}
 for line in value_inputs:
@@ -45,7 +45,7 @@ invest_1kWp_solar = 1350  # Euro source: https://www.rechnerphotovoltaik.de/rech
 ##################################################################################
 # Creating a list based on the location and the average daily sun hours (year) ###
 ##################################################################################
-LST__date_sun_hours_clear_sky = daily_sun_hours_clear_sky_lst_one_year(2020, latitude_val, longitude_val)
+LST__date_sun_hours_clear_sky = daily_sun_hours_clear_sky_lst_one_year(2022, latitude_val, longitude_val)
 LST_sun_hours = correcting_sun_hour_clear_sky__observed_average(sun_hour_average, LST__date_sun_hours_clear_sky)
 
 ##################################################################################
@@ -77,18 +77,18 @@ armortization_years, sum_interest_credit, LST_compare_NO_solar_costs, LST_compar
 ##################################################################################
 
 print(
-    f"\nYou consumed last year {yearly_energy_consumption:.0f} kwH, with the price of {energy_costs:.3f}EURO per kwH. \nYou paid {costs_without_solar:.0f} EURO.")
+    f"\nYou consumed last year {yearly_energy_consumption:.0f} kwH, with the price of {energy_costs:.3f}KSH per kwH. \nYou paid {costs_without_solar:.0f} KSH.")
 print(f"Thus you produced {co2_production:.0f} kg co2.")
-print(f"\nYou want to produce {offset_pv_production * 100:.0f}% of energy consumption even on regular winter days.")
+print(f"\nYou want to produce {offset_pv_production * 100:.0f}% of energy consumption even on regular cloudy days.")
 if not enough_roof_area_available:
     print("To do so you do not have enough roof area.\n")
 if enough_roof_area_available:
     print("To do so you have enough roof area: NICE!")
-    print(f"You need to install {needed_pv_area:.2f}m^2 and you need to invest {investment_pv_area:.0f} Euro in order to achieve your solar production goal.")
-    print(f"With the {needed_pv_area:.2f} m2 area of solar panels you can produce {energy_savings:.1f} kwH, \nand save yearly {costs_savings:.0f} EURO and  {co2_savings_with_solar:.0f} kg CO2. \nAfter {armortization_years} years you save money compared to not having solar panels.")
+    print(f"You need to install {needed_pv_area:.2f}m^2 and you need to invest {investment_pv_area:.0f} KSH in order to achieve your solar production goal.")
+    print(f"With the {needed_pv_area:.2f} m2 area of solar panels you can produce {energy_savings:.1f} kwH, \nand save yearly {costs_savings:.0f} KSH and  {co2_savings_with_solar:.0f} kg CO2. \nAfter {armortization_years} years you save money compared to not having solar panels.")
     if credit_need > 0:
         print(
-            f"You need to borrow {credit_need:.0f} EURO, based on your interest rate of {credit_interest_rate * 100:.1f} % you need to pay {sum_interest_credit:.0f} EUROS interest, "
+            f"You need to borrow {credit_need:.0f} KSH , based on your interest rate of {credit_interest_rate * 100:.1f} % you need to pay {sum_interest_credit:.0f} KSH interest, "
             f"\nand if you pay back the yearly cost savings of installing solar panels you can pay back the credit in {pay_back_years_credit} years ")
     print("\n")
 ##################################################################################
@@ -99,7 +99,7 @@ plt.figure(figsize=(5, 3), constrained_layout=True)
 plt.plot(LST_compare_solar_costs, label="Solar_costs")
 plt.plot(LST_compare_NO_solar_costs, label="NO_Solar_costs")
 plt.xlabel('Years')
-plt.ylabel('Costs in EURO')
+plt.ylabel('Costs in KSH')
 plt.title("Comparison Solar Costs vs. No Solar Costs")
 plt.legend()
 plt.savefig('plot_solarcosts_vs_nosolarcosts.svg', dpi=350)
